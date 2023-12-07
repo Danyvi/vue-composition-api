@@ -11,7 +11,7 @@
   imports
 */
 
-  import NavBar from '@/components/layouts/NavBar.vue'
+  import NavBar from '@/components/Layout/NavBar.vue'
 </script>
 
 <style>
