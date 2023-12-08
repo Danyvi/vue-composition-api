@@ -11,8 +11,16 @@
       </div>
     </div>
     <footer class="card-footer">
-      <a href="#" class="card-footer-item">Edit</a>
-      <a href="#" class="card-footer-item">Delete</a>
+      <a
+        href="#"
+        class="card-footer-item"
+        @click.prevent="handleEditClicked"
+      >Edit</a>
+      <a
+        href="#"
+        class="card-footer-item"
+        @click.prevent="handleDeleteClicked"
+      >Delete</a>
     </footer>
   </div>
 </template>
@@ -35,6 +43,13 @@ const props = defineProps({
 })
 
 /**
+ * Emits
+ */
+const emit = defineEmits([
+  'deleteClicked'
+])
+
+/**
  * Characters Length
  */
 const charactersLength = computed(() => {
@@ -43,4 +58,15 @@ const charactersLength = computed(() => {
   return `${length} ${description}`
 })
 
+/**
+ * Edit Note
+ */
+const handleEditClicked = () => console.log('Edit Note');
+
+/**
+ * Delete Note
+ */
+ const handleDeleteClicked = () => {
+  emit('deleteClicked', props.note.id)
+ }
 </script>
