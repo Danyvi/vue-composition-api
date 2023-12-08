@@ -18,7 +18,7 @@
           <button
             class="button is-link has-background-success"
             @click="addNote"
-            :disabled="newNote.length < 5"
+            :disabled="!newNote"
           >
             Add New Note
           </button>
