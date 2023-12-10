@@ -6,61 +6,62 @@
       <div class="content">
         {{ note.content }}
         <div class="has-text-right has-text-grey-light mt-2">
-          <small>{{ charactersLength }}</small>
+          <small>{{ characterLength }}</small>
         </div>
       </div>
     </div>
     <footer class="card-footer">
-      <a
-        href="#"
+      <RouterLink
+        :to="`/editNote/${ note.id }`"
         class="card-footer-item"
-        @click.prevent="handleEditClicked"
-      >Edit</a>
-      <a
         href="#"
-        class="card-footer-item"
+      >
+        Edit
+      </RouterLink>
+      <a
         @click.prevent="storeNotes.deleteNote(note.id)"
-      >Delete</a>
+        class="card-footer-item"
+        href="#"
+      >
+        Delete
+      </a>
     </footer>
   </div>
 </template>
 
 <script setup>
-/**
- * Imports
- */
-import { computed } from 'vue'
-import { useStoreNotes } from '@/stores/storeNotes'
+/*
+  imports
+*/
 
-/**
- * Store
- */
- const storeNotes = useStoreNotes()
+  import { computed } from 'vue'
+  import { useStoreNotes } from '@/stores/storeNotes'
 
+/*
+  props
+*/
 
-/**
- * Props
- */
-const props = defineProps({
-  note: {
-    type: Object,
-    required: true
-  }
-})
+  const props = defineProps({
+    note: {
+      type: Object,
+      required: true
+    }
+  })
 
+/*
+  store
+*/
 
-/**
- * Characters Length
- */
-const charactersLength = computed(() => {
-  const length = props.note.content.length
-  const description = length > 1 ? 'characters' : 'character'
-  return `${length} ${description}`
-})
+  const storeNotes = useStoreNotes()
 
-/**
- * Edit Note
- */
-const handleEditClicked = () => console.log('Edit Note');
+/*
+  character length
+*/
+
+  const characterLength = computed(() => {
+    let length = props.note.content.length
+    let description = length > 1 ? 'characters' : 'character'
+    return `${ length } ${ description }`
+  })
 
 </script>
