@@ -18,6 +18,7 @@
           class="textarea"
           :placeholder="placeholder"
           ref="textareaRef"
+          v-autofocus
         />
       </div>
     </div>
@@ -80,4 +81,12 @@
     focusTextarea
   })
 
+/*
+  directives
+*/
+const vAutofocus = {
+  mounted: (el) => {
+    el.focus()
+  }
+}
 </script>
