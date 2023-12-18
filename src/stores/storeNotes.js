@@ -11,6 +11,7 @@ import { useStoreAuth } from '@/stores/storeAuth'
 
 let noteCollectionRef = null
 let noteCollectionQuery = null
+let getNotesSnapshot = null
 
 export const useStoreNotes = defineStore('storeNotes', {
   state: () => {
@@ -31,7 +32,8 @@ export const useStoreNotes = defineStore('storeNotes', {
     },
     getNotes() {
       this.notesLoaded = false
-      onSnapshot(noteCollectionQuery, (querySnapshot) => {
+
+      getNotesSnapshot = onSnapshot(noteCollectionQuery, (querySnapshot) => {
         let notes = []
         querySnapshot.forEach((doc) => {
           let note = {
@@ -47,6 +49,9 @@ export const useStoreNotes = defineStore('storeNotes', {
     },
     clearNotes() {
       this.notes = []
+      if(getNotesSnapshot) {
+        getNotesSnapshot() // unsubscribe from any active listener
+      }
     },
     async addNote(newNoteContent) {
       let currentDate = new Date().getTime(),
