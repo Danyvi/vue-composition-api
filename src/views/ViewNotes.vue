@@ -52,7 +52,6 @@
   import AddEditNote from '@/components/Notes/AddEditNote.vue'
   import { useStoreNotes } from '@/stores/storeNotes'
   import { useWatchCharacters } from '@/use/useWatchCharacters'
-  import { onMounted } from 'vue';
 
 
 /*
@@ -60,13 +59,6 @@
 */
 const storeNotes = useStoreNotes()
 
-/**
- * Mounted
- */
-
- onMounted(() => {
-  storeNotes.getNotes()
-})
 
 /*
   notes

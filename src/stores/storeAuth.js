@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged
 } from "firebase/auth";
+import { useStoreNotes } from '@/stores/storeNotes'
 
 
 export const useStoreAuth = defineStore('storeAuth', {
@@ -16,13 +17,18 @@ export const useStoreAuth = defineStore('storeAuth', {
   },
   actions: {
     init() {
+      // Store
+      const storeNotes = useStoreNotes()
+
       onAuthStateChanged(auth, (user) => {
         if (user) {
           this.user.id = user.uid;
           this.user.email = user.email;
+          storeNotes.init()
           this.router.push('/')
         } else {
           this.user = {}
+          storeNotes.clearNotes()
           this.router.replace('/auth')
         }
       });
