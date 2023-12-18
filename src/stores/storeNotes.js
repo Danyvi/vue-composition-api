@@ -30,7 +30,7 @@ export const useStoreNotes = defineStore('storeNotes', {
       noteCollectionQuery = query(noteCollectionRef, orderBy("date", "desc"));
       this.getNotes()
     },
-    getNotes() {
+    async getNotes() {
       this.notesLoaded = false
 
       getNotesSnapshot = onSnapshot(noteCollectionQuery, (querySnapshot) => {
@@ -45,6 +45,8 @@ export const useStoreNotes = defineStore('storeNotes', {
         });
         this.notes = notes
         this.notesLoaded = true
+      }, error => {
+        console.log('error.message: ', error.message);
       });
     },
     clearNotes() {
